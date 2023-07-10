@@ -1,10 +1,15 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-<h1 class="title">
-  Economic Calendar
-</h1>
-<h2 class="subtitle">
-  Welcome Back!
-</h2>
+    <h1>{% block title %} Welcome to FlaskBlog {% endblock %}</h1>
+    {% for post in posts %}
+        <a href="{{ url_for('main.post', post_id=post['id']) }}">
+            <h2>{{ post['title'] }}</h2>
+        </a>
+        <span class="badge badge-primary">{{ post['created'] }}</span>
+        <a href="{{ url_for('edit', id=post['id']) }}">
+          <span class="badge badge-warning">Edit</span>
+        </a>
+        <hr>
+    {% endfor %}
 {% endblock %}
